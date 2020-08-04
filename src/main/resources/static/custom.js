@@ -12,8 +12,19 @@ function initMap() {
         var marker = new google.maps.Marker({
             position: { lat: parseFloat(busLocations[i].LATITUDE), lng: parseFloat(busLocations[i].LONGITUDE) },
             map: map,
-            icon: iconBase + 'bus.png'
-
+            icon: iconBase + 'bus.png',
+            title: "Click to zoom"
+        });
+        map.addListener("center_changed", () => {
+            // 3 seconds after the center of the map has changed, pan back to the
+            // marker.
+            // window.setTimeout(() => {
+            //     map.panTo(marker.getPosition());
+            // }, 5000);
+        });
+        marker.addListener("click", () => {
+            map.setZoom(13);
+            map.setCenter(marker.getPosition());
         });
     }
 
