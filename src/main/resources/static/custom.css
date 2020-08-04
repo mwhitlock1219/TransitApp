@@ -1,8 +1,20 @@
 #map {
-    height: 75%;
+    height: 100%;
 }
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
+ /*this will hide the bus-icon*/
+ img[src="https://maps.gstatic.com/mapfiles/transit/iw2/6/bus.png"]{
+    width:0 !important;
+  }
+
+  /*use a custom icon as background for the span which follows the icon*/
+  img[src="https://maps.gstatic.com/mapfiles/transit/iw2/6/bus.png"]+span{
+    background:url(http://i.stack.imgur.com/8lcVw.png?s=32&g=1) no-repeat;
+    background-size: 16px 16px;
+    padding-left:18px;
+  }
