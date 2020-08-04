@@ -31,46 +31,54 @@
                             type="Submit">Find</button>
                     </div>
                 </form>
-
-            </div>
-
+            </div> <!-- close span6 -->
         </div>
+        <!--close row-->
+        <div class="container">
+            <div class="row" th:if="${buses != null and buses.size() > 0}">
+                <div class="col-lg-6">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Route #</th>
+                            <th>Bus #</th>
+                            <th>Next Stop</th>
+                            <th>Distance (mi)</th>
+                        </tr>
+                        <tr th:each="bus: ${buses}">
+                            <td th:text="${bus.ROUTE}"></td>
+                            <td th:text="${bus.VEHICLE}"></td>
+                            <td th:text="${bus.TIMEPOINT}"></td>
+                            <td th:text="${bus.distance}"></td>
 
-        <div class="row" th:if="${buses != null and buses.size() > 0}">
-            <table class="table table-striped">
-                <tr>
-                    <th>Route #</th>
-                    <th>Bus #</th>
-                    <th>Next Stop</th>
-                    <th>Distance (mi)</th>
-                </tr>
-                <tr th:each="bus: ${buses}">
-                    <td th:text="${bus.ROUTE}"></td>
-                    <td th:text="${bus.VEHICLE}"></td>
-                    <td th:text="${bus.TIMEPOINT}"></td>
-                    <td th:text="${bus.distance}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <!--close table div-->
+                <div class="text-center" th:if="${buses != null and buses.size() == 0}">
+                    <h3>Sorry, there are no nearby buses.</h3>
+                </div>
+                <div class="col-lg-6">
+                    <div id="map"></div>
 
-                </tr>
-            </table>
-        </div>
-
-        <div class="text-center" th:if="${buses != null and buses.size() == 0}">
-            <h3>Sorry, there are no nearby buses.</h3>
-        </div>
-    </div>
-
-    <div id="map"></div>
-
-    <div th:if="${buses !=null and buses.size() > 0}">
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            let busLocations = /*[[${buses}]]*/ null
+                    <div th:if="${buses !=null and buses.size() > 0}">
+                        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            let busLocations = /*[[${buses}]]*/ null
         /*]]>*/
-        </script>
-        <script th:inline="javascript" src="/custom.js"></script>
-        <script th:src="@{${'https://maps.googleapis.com/maps/api/js?key=' 
+                        </script>
+                        <script th:inline="javascript" src="/custom.js"></script>
+                        <script th:src="@{${'https://maps.googleapis.com/maps/api/js?key=' 
         + @environment.getProperty('google_api_key') + '&callback=initMap'}}" async defer></script>
+                    </div>
+                    <!--js div-->
+                </div>
+                <!--map image div-->
+            </div>
+            <!--close row-->
+        </div>
+        <!--close 2nd container-->
     </div>
+    <!--close 1st container-->
 </body>
 
 </html>
