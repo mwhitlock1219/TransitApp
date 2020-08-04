@@ -13,10 +13,11 @@ function initMap() {
             position: { lat: parseFloat(busLocations[i].LATITUDE), lng: parseFloat(busLocations[i].LONGITUDE) },
             map: map,
             icon: iconBase + 'bus.png',
+            // add zoom capability by clicking on bus icon
             title: "Click to zoom"
         });
         map.addListener("center_changed", () => {
-            // 3 seconds after the center of the map has changed, pan back to the
+            // 5 seconds after the center of the map has changed, pan back to the
             // marker.
             // window.setTimeout(() => {
             //     map.panTo(marker.getPosition());
@@ -27,6 +28,10 @@ function initMap() {
             map.setCenter(marker.getPosition());
         });
     }
+    // end zoom capabilities by clicking on bus icon
+    // add transit lines to map
+    const transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
 
     infoWindow = new google.maps.InfoWindow;
 
